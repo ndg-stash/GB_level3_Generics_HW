@@ -22,28 +22,25 @@ public class Main {
         // g. Не забываем про метод добавления фрукта в коробку.
 
 
-        Box box1 = new Box(new ArrayList<>());
+        Box <Apple> box1 = new Box(new ArrayList<>());
         box1.addFruits(new Apple(), 10);
-        //box1.addFruits(new Orange(), 1);
-        Box box2 = new Box(new ArrayList<>());
-        box2.addFruits(new Apple(), 20);
 
-        Box box3 = new Box(new ArrayList<>());
-        box3.addFruits(new Orange(), 20);
+        //box1.addFruits(new Orange(), 1);
+        Box <Apple> box2 = new Box(new ArrayList<>());
+        box2.addFruits(new Apple(), 3);
+
+        Box <Orange> box3 = new Box(new ArrayList<>());
+        box3.addFruits(new Orange(), 7);
 
         System.out.println(box1.getBoxWeight());
         System.out.println(box2.getBoxWeight());
         System.out.println(box3.getBoxWeight());
 
         box1.pourFrom(box2);
-        box1.pourFrom(box3);
-        box1.addFruits(new Orange(), 1);
 
         System.out.println(box1.getBoxWeight());
         System.out.println(box2.getBoxWeight());
-
-        box2.addFruits(new Orange(),20);
-        System.out.println(box1.compareWeight(box2));
+        System.out.println(box3.getBoxWeight());
 
     }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Box<T extends Fruit> {
@@ -9,19 +10,17 @@ public class Box<T extends Fruit> {
         this.volume = new ArrayList<>();
     }
 
+    public void addFruitsV1(T fruit){
+        volume.add(fruit);
+    }
+
     public void addFruits(T fruit, int quantity){
-
-        if (this.getBoxWeight() == 0 || this.volume.get(0).getClass().equals(fruit.getClass())) {
-
-            if (quantity > 0) {
-                for (int i = 0; i < quantity; i++) {
-                    this.volume.add(fruit);
-                }
-            } else {
-                System.out.println("Добавить можно только целое положительное число!");
+        if (quantity > 0) {
+            for (int i = 0; i < quantity; i++) {
+                this.volume.add(fruit);
             }
         } else {
-            System.out.println("Фрукты смешивать нельзя!");
+            System.out.println("Добавить можно только целое положительное число!");
         }
     }
 
@@ -34,7 +33,7 @@ public class Box<T extends Fruit> {
         return boxWeight;
     }
 
-    public boolean compareWeight(Box inBox){
+    public boolean compareWeight(Box<?> inBox){
         return (this.getBoxWeight() == inBox.getBoxWeight());
     }
 
@@ -43,25 +42,21 @@ public class Box<T extends Fruit> {
         return this.volume.get(0).getClass().toString();
     }
 
-    public void pourFrom(Box fromBox){
+    public void pourFrom(Box<T> fromBox){
         int fromBoxFruitsCount = fromBox.volume.size();
         if (fromBoxFruitsCount == 0) {
             System.out.println("Коробка пустая! что высыпать то?");
             return;
         }
 
-        if (this.getBoxWeight() == 0 || this.volume.get(0).getClass().equals(fromBox.volume.get(0).getClass())) {
+        this.volume.addAll(fromBox.volume);
 
-            for (int i = 0; i < fromBoxFruitsCount; i++) {
-                this.volume.add(this.volume.get(i));
-            }
+//        for (int i = 0; i < fromBoxFruitsCount; i++) {
+//            this.volume.add((T) fromBox.volume.get(i));
+////            System.out.println(fromBox.volume.get(i));
+//        }
 
-            fromBox.volume.clear();
-
-        } else {
-            System.out.println("Фрукты смешивать нельзя!");
-        }
-
+        fromBox.volume.clear();
 
     }
 
